@@ -1,52 +1,202 @@
-﻿<!DOCTYPE html>
+﻿@'
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Anuj Yadav | Cloud Engineer</title>
+  <meta name="description" content="Anuj Yadav, MSc Cloud Computing graduate in Dublin. AWS, serverless, CI/CD.">
+  <title>Anuj Yadav | Junior Cloud Engineer</title>
   <style>
+    :root {
+      --ink: #1b1f24;
+      --muted: #5b6670;
+      --line: #e3e7eb;
+      --accent: #0b5fff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: system-ui, sans-serif;
-      max-width: 720px;
-      margin: 3rem auto;
-      padding: 0 1rem;
-      line-height: 1.6;
-      color: #1a1a1a;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #f6f8fa;
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    main {
+      max-width: 820px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 2.5rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    header {
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
 
     h1 {
-      margin-bottom: 0;
+      margin: 0;
+      font-size: 2rem;
     }
 
-    .sub {
-      color: #555;
-      margin-top: 0.25rem;
+    .role {
+      color: var(--muted);
+      margin: .25rem 0 .5rem;
+      font-size: 1.05rem;
+    }
+
+    h2 {
+      font-size: .85rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: .3rem;
+      margin: 1.8rem 0 .8rem;
+    }
+
+    h3 {
+      margin: .8rem 0 .1rem;
+      font-size: 1.02rem;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: .9rem;
+      margin: 0;
+    }
+
+    ul {
+      margin: .4rem 0 0;
+      padding-left: 1.2rem;
+    }
+
+    li {
+      margin: .25rem 0;
     }
 
     a {
-      color: #0b5fff;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .skills dt {
+      font-weight: 600;
+      margin-top: .5rem;
+    }
+
+    .skills dd {
+      margin: 0;
+      color: #2d343b;
+    }
+
+    footer {
+      margin-top: 2rem;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    @media (max-width:600px) {
+      main {
+        margin: 0;
+        border: 0;
+        padding: 1.5rem;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      main {
+        border: 0;
+        margin: 0;
+      }
     }
   </style>
 </head>
 
 <body>
-  <h1>Anuj Yadav</h1>
-  <p class="sub">Cloud Engineer | Dublin, Ireland</p>
+  <main>
+    <header>
+      <h1>Anuj Yadav</h1>
+      <p class="role">Junior Cloud Engineer | Cloud Support | Dublin, Ireland</p>
+      <a href="https://github.com/31anuj">github.com/31anuj</a>
+    </header>
 
-  <h2>About</h2>
-  <p>MSc Cloud Computing graduate (National College of Ireland, NFQ Level 9, 2026). I build and test serverless and
-    cloud systems on AWS.</p>
+    <section>
+      <h2>Profile</h2>
+      <p>MSc Cloud Computing graduate focused on AWS and serverless systems. I build, measure and document cloud
+        projects, with attention to security and cost.</p>
+    </section>
 
-  <h2>Thesis project</h2>
-  <p>Cost-aware predictive pre-warming for serverless cold starts. In a simulation on the Azure Functions 2019 trace
-    (500 functions, 14 days), the approach cut cold starts by 56.7%. I also ran a proof of concept on AWS Lambda and
-    fixed a telemetry feedback loop with a custom CloudWatch metric.</p>
+    <section>
+      <h2>Projects</h2>
 
-  <h2>Links</h2>
-  <p><a href="https://github.com/31anuj">GitHub</a></p>
+      <h3>Static site on S3 and CloudFront with CI/CD</h3>
+      <p class="meta">AWS CLI, S3, CloudFront, IAM, GitHub Actions | <a
+          href="https://github.com/31anuj/Portfolio-site">Source</a></p>
+      <ul>
+        <li>Hosted this site on a private S3 bucket behind CloudFront with Origin Access Control and HTTPS-only
+          delivery.</li>
+        <li>Automated deployment with GitHub Actions and OIDC. The pipeline assumes a role limited to one repo, one
+          branch, one bucket and one distribution. No stored AWS keys.</li>
+        <li>Fixed an OIDC authorisation failure by reading the token claims in CI and correcting the IAM trust policy.
+        </li>
+      </ul>
 
-  <p class="sub">Hosted on S3 behind CloudFront.</p>
+      <h3>MSc thesis: cost-aware pre-warming for serverless cold starts</h3>
+      <p class="meta">Python, AWS Lambda, EventBridge, DynamoDB, API Gateway, CloudWatch</p>
+      <ul>
+        <li>Simulated 7,000 function-days of the Azure Functions 2019 trace. Cold starts fell from 71,460 to 30,971
+          (-56.7%) with Simple Exponential Smoothing.</li>
+        <li>Holt's method performed comparably (-55.7%). The simpler model was marginally better.</li>
+        <li>Ran an AWS proof of concept: 21 decision epochs, 7 pre-warm, 14 skip, 1 cold start, about $1.30 total spend.
+        </li>
+        <li>Found and fixed a telemetry feedback loop using a custom CloudWatch metric.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <dl class="skills">
+        <dt>AWS</dt>
+        <dd>EC2, S3, CloudFront, IAM, Lambda, EventBridge, DynamoDB, API Gateway, CloudWatch</dd>
+        <dt>Automation</dt>
+        <dd>GitHub Actions, OIDC, AWS CLI, Git</dd>
+        <dt>Languages</dt>
+        <dd>Python, Bash</dd>
+        <dt>Currently learning</dt>
+        <dd>Docker, Terraform</dd>
+      </dl>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <h3>MSc Cloud Computing, National College of Ireland</h3>
+      <p class="meta">NFQ Level 9, 2026</p>
+      <h3>BSc Information Technology, University of Mumbai</h3>
+      <p class="meta">2022</p>
+    </section>
+
+    <footer>Hosted on S3 behind CloudFront. Deployed by GitHub Actions.</footer>
+  </main>
 </body>
 
 </html>
+'@ | Set-Content -Path index.html -Encoding utf8
+
+start index.html
